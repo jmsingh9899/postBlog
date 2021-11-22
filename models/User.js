@@ -15,9 +15,6 @@ User.init({
     },
     password:{
         type:DataTypes.STRING,
-        validate:{
-            len:[8]
-        }
     }
 },{
     hooks:{
