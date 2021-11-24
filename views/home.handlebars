@@ -1,7 +1,7 @@
 <h1>Home page!</h1>
 
 {{#each post}}
-    <div class="card" >
+    <div class=" post card" id="post{{id}}">
         <h3>{{title}}</h3>
         <p>{{content}}</p>
         <p>Author: {{User.username}}</p>
@@ -11,4 +11,9 @@
         </div>
         {{/each}}
     </div>
+{{#if loggedIn}}
+  <textarea class="commentarea" id="comment{{id}}"></textarea>
+  <button class="commentBtn" id="{{id}}">Add your comment</button>
+{{/if}}
 {{/each}}
+<script src='./js/home.js'></script>
