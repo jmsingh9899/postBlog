@@ -104,7 +104,9 @@ router.get("/dashboard", (req, res) => {
         }).then(foundData => {
             const hbsData = foundData.map(post => post.get({ plain: true }))
             res.render('dashboard', {
-                data: hbsData
+                data: hbsData,
+                user: req.session.user
+
             })
         })
     } else {
@@ -112,19 +114,30 @@ router.get("/dashboard", (req, res) => {
     }
 
 })
+router.post("/newPost", (req, res) => {
+    Post.create({
+        title: req.body.newTitle,
+        comment: req.body.newComment
+    }).then(updated => {
+        console.log('done')
+    })
+})
+
 router.put("/newPost", (req, res) => {
     Post.update({ content: req.body.content },
-        {where: {id: req.body.id}}
+        { where: { id: req.body.id } }
     ).then(updated => {
         console.log('done')
     })
 }
 )
 
-router.delete('/newPost/:id', (req,res) => {
-    Post.destroy({where: {
-        id: req.params.id
-    }})
+router.delete('/newPost/:id', (req, res) => {
+    Post.destroy({
+        where: {
+            id: req.params.id
+        }
+    })
 })
 
 module.exports = router;
